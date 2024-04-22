@@ -1,0 +1,30 @@
+.AABody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.AABody > form{
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 40px 80px 30px 80px;
+}
+.AABody > form > div > h2{
+    height: auto;
+    margin-bottom: 20px;
+}
+.AABody > form > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.AABody > form > div > input[type="text"], .AABody > form > div > input[type="password"]{
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+}
+.AABody > form > .formButtonSection{
+    margin-top: 20px;
+}

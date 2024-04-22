@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AdminAuthentication</title>
+    <meta charset="UTF-8">
+    <meta class="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="Index.css">
+    <link rel="stylesheet" type="text/css" href="AACss.css">
+    <!-- <link rel="stylesheet" type="text/css" href="AdminPanelCss.css"> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="AABody">
+    <form action="http://localhost/project-pushkar/AA_backend.php" method="post">
+        <div>
+            <h2>Admin Login</h2>
+        </div>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+        </div>
+        <div class="formButtonSection">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+
+</body>
+</html>

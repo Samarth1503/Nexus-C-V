@@ -1,0 +1,577 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+:root{
+  --adminPanelDivPaddings: 40px;
+}
+body{
+  background-color: white;
+}
+.adminPanelHeading{
+  height: 100px;
+  margin-bottom: 20px;
+}
+.adminPanelHeadingDiv{
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #e5ceff; */
+  background-color: #eff4ff;
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.adminPanelHeadingDiv > p{
+  font-size: 40px;
+  font-weight: 500;
+  margin: 0 auto;
+  padding-right: calc(100px + var(--adminPanelDivPaddings));
+}
+.adminPanelHeadingDiv > div{
+  left: 40px;
+}
+.adminPanelHeadingDiv > div > button{
+  border: 1px;
+  border-radius: 50px;
+  border-style: solid;
+  padding: 10px 30px;
+  margin-left: var(--adminPanelDivPaddings);
+}
+
+.adminPanelContainer{
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 593px 1fr auto; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "productsSold revenueGenerated revenueGenerated dropDownForCountOfStuff"
+      "addAProduct addAProduct deleteAProduct deleteAProduct"
+      "addABrand addABrand addCategory addCategory"; 
+  }
+
+  .addCategory { grid-area: addCategory; }
+  .addABrand { grid-area: addABrand; }    
+  
+  @media screen and (max-width: 1630px) {
+    .adminPanelContainer {
+        display: grid;
+        /* height: fit-content;  */
+        grid-auto-flow: column dense; 
+        grid-template-columns: 1fr 1fr; 
+        grid-template-rows: 1fr 1fr 1fr 0.7fr; 
+        gap: 15px 15px; 
+        grid-template-areas: 
+    "productsSold dropDownForCountOfStuff"
+    "revenueGenerated revenueGenerated"
+    "addAProduct addAProduct"
+    "deleteAProduct deleteAProduct"; 
+}
+.hide-br {
+    display: none;}
+.addAProduct > form > header {
+    margin-left: 23vw !important;}
+.deleteAProduct > form > header{
+    margin-left: 17vw !important;}
+.dropDownForCountOfStuff > form > input[type="submit"] {
+    margin-top: 430px !important;
+}
+ form > div {
+    padding: 1px 1px 1px 100px !important;
+ }
+.radial-graph{
+    margin-top: 50px !important;
+    margin-left: 13.5vw !important;
+}
+input[type=submit]{ margin-left: -8vw;}
+
+.productsSold-container {
+    margin: 45px 135px 20px 5px !important;}
+.activeCustomers-container {
+    margin: 25px 30px 25px 30px !important;}
+}
+
+@media screen and (max-width: 1430px){
+    .adminPanelContainer {
+        display: grid;
+        /* height: fit-content;  */
+        grid-auto-flow: column dense; 
+        grid-template-columns: 1fr 1fr; 
+        grid-template-rows: 1fr 1fr 0.7fr; 
+        gap: 15px 15px; 
+        grid-template-areas: 
+    "productsSold dropDownForCountOfStuff"
+    "addAProduct addAProduct"
+    "deleteAProduct deleteAProduct"; 
+}
+.revenueGenerated{
+    display: none !important;
+}
+    .chart-container, .countersAndCircles {
+        display: none !important;
+    }     
+
+.hide-br{ display: block;}
+
+.addAProduct > form > header{
+  margin-left: 150px !important;}
+.addABrand > form > div{
+  padding: 0 0 0 200px !important; }  
+.addABrand > form > header{
+  margin-left: 200px !important; }
+.addABrand > form > div > .save-clearForm{
+  margin-left: -120px !important;}
+.deleteAProduct > form {
+  height: auto !important; }
+.deleteAProduct > form > header{
+  margin: 0 0 0 100px !important; }
+.deleteAProduct > form > div > .save-clearForm{
+  margin-top: 15px !important; }
+}
+
+
+  .addAProduct { grid-area: addAProduct; }
+  .deleteAProduct { grid-area: deleteAProduct; }
+
+  .addAProduct > form, .deleteAProduct > form {
+    height: 564px;
+  }
+  .addABrand > form, .addCategory > form{
+    height: 296px;
+  }
+
+  /* Drop Down section  */
+
+  .dropDownForCountOfStuff {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      /* height: 100vh; */
+      align-items: center;
+      justify-content: flex-start;
+      /* font-family: 'Ek Mukta'; */
+      /* text-transform: uppercase; */
+      font-weight: 300;
+      letter-spacing: 4px;
+      background-color: #f0f8ff;
+     
+  }
+  .dropDownForCountOfStuff > form {
+    padding:0px;
+    border-radius: 0px;
+    border-width: 0px;
+    border-style: solid;
+    margin-top: 0px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+  .dropDownForCountOfStuff > form > select{
+    padding: 10px;
+  }
+  .resultDiv{
+    margin-top: 90px;
+  }
+  .dropDownForCountOfStuff > form > button{
+    margin-top: 40px;
+    width: 100px;
+    padding: 10px;
+    margin-left: 100px;
+    background-color: rgb(224, 93, 93);
+    color: white;
+    border-color: white;
+  }
+
+
+
+/* Revenue Generated Section */
+
+  .revenueGenerated { grid-area: revenueGenerated; 
+    background-color: aliceblue;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    }
+  
+  .productsSold { grid-area: productsSold; 
+    background-color: aliceblue;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    }
+    .productsSoldsubDiv {
+        height: 221.5px;
+        width: 302.966px;
+        border-radius: 25px;
+        background-color: rgba(170, 221, 142, 0.789);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center; 
+        box-shadow: 5px 5px 0px 0px rgba(255,204,54,1), 10px 10px 0px 0px rgba(255,204,54,0.63), 15px 15px 0px 0px rgba(255,204,54,0.36), 20px 20px 0px 0px rgba(255,204,54,0.22), 25px 25px 0px 0px rgba(255,204,54,0.07);
+    }
+    .productsSold-container {
+        margin: 45px 35px 20px 25px;}
+    .activeCustomers-container {
+        margin: 5px 30px 25px 30px;}
+
+    /* .counter-container {} */
+      
+      .counter {
+        text-align: center; 
+        width: 354px;
+    }
+      
+      .counter > h3, .counter > span {
+        padding: 0.5rem 0;
+        font-size: 2.3rem;
+        font-weight: 800; }
+
+    .productsSold > div > span {
+        border: 2px solid;
+        border-style: solid;
+        width: fit-content;
+        height: fit-content;
+        padding: 10px 15px 10px 15px;
+        border-radius: 25px;
+        margin-top: -60px;
+    }
+
+form{
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    margin-top: 10px;
+    padding-bottom: 15px;
+}
+form > header > h2 {
+    width: fit-content;
+    margin-left: 25%;
+    margin-bottom: 20px;
+    padding: 0 10px 0 10px;
+    border-radius: 2.5px;
+    border-right-width: 5px;
+    border-right-style: solid;
+    border-left-width: 5px;
+    border-left-style: solid;
+    /* border-bottom-width: 2px;
+    border-bottom-style: dotted;
+    border-top-width: 2px;
+    border-top-style: dotted; */
+}
+form > div {
+    clear: both;
+    overflow: hidden;
+    padding: 1px 1px 1px 100px;
+    margin-bottom: 10px;
+}
+  form > div > label {
+    width: 35%;
+    float: left;
+    margin-right: 10px;
+    padding-right: 10px;
+    border-radius: 3px;
+    padding-top: 5px;
+  }  
+
+  .addAProduct > form > header {
+    margin-left: 5vw;
+  }
+  .addAProduct > form > div > div > input[type="radio"], .deleteAProduct > form > div > div > input[type="radio"] {
+    display:inline-block;
+    margin-right: 1px;
+  }
+  .choice {
+    margin-right: 4px;
+  }
+
+  .addAProduct > form > div > div > input[type=text], .deleteAProduct > form > div > div > input[type=text], .addABrand > form > div > div > input[type=text],
+  .addAProduct > form > div > div > input[type=number], .deleteAProduct > form > div > div > input[type=number], .addABrand > form > div > div > input[type=tel],
+  .addAProduct > form > div > div > input[type=date], .deleteAProduct > form > div > div >  input[type=date], .addABrand > form > div > div >  input[type=email],
+  .addAProduct > form > div > div > textarea, .deleteAProduct > form > div > div > textarea,
+  .addAProduct > form > div > div > select, .deleteAProduct > form > div > div > select,
+  .addCategory > form > div > input[type=text]{
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    border-radius: 7.5px;
+    background-color: #d8eafba3;
+    padding: 5px 5px 5px 15px;
+  }
+
+  input[type=date]{
+    padding: 5px;
+  }
+  input[type=text]:focus, textarea:focus, input[type=number]:focus, input[type=date]:focus, input[type=tel]:focus, input[type=email]:focus{
+    outline: 0;
+    border-color: #4697e4;
+  }
+  .save-clearForm{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    margin-right: 190px;
+  }
+  .deleteAProduct > form > header{
+    margin: 0 0 60px 70px; }
+  .deleteAProduct > form > div > .save-clearForm{
+    margin-top: 110px; }
+  input[type=submit],input[type=reset]{
+    height: 40px;
+    width: 100px;
+    padding: 0px 8px 0 8px;
+    margin-right: 20px;
+    /* for Box ish buttons : */
+    /* border-radius: 5px;  */
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 25px;
+  }
+  input[type=submit]{
+    background-color: rgba(64, 119, 238, 0.691); }
+  input[type=reset]{
+    background-color: rgba(233, 53, 53, 0.701); }
+  input[type=submit]:hover{
+    background-color: rgba(62, 111, 218, 0.691); }
+  input[type=reset]:hover{
+    background-color: rgba(216, 49, 49, 0.785); }
+
+  .saveForm{
+    margin: 0px 7px 0px 7px;
+  }
+
+  
+  @media (max-width: 600px) {
+    form > div {
+      margin: 0 0 15px 0; 
+    }
+    form > div > label {
+        width: 100%;
+      float: none;
+      margin: 0 0 5px 0;
+    }
+    form > div > div,
+    form > div > fieldset > div {
+      width: 100%;
+      float: none;
+    }
+    input[type=text],
+    input[type=email],
+    input[type=url],
+    input[type=password],
+    textarea,
+    select {
+      width: 100%; 
+    }
+  }
+  @media (min-width: 1200px) {
+    form > div > label {
+        text-align: right;
+    }
+  }
+
+  /* Revenue Generated Div */
+
+  .revenueGenerated{
+    display: grid; 
+    grid-auto-columns: 1fr; 
+    grid-template-rows: 400px 193px; 
+    gap: 5px 5px; 
+    justify-content: center; 
+  }
+  .chart-container { grid-area: 1 / 1 / 2 / 2; }
+  .countersAndCircles {
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+    "Counter1 Counter2 Counter3"; 
+  grid-area: 2 / 1 / 3 / 2; 
+}
+.Counter1 { grid-area: Counter1; 
+    text-align: center;}
+.Counter2 { grid-area: Counter2; 
+    text-align: center;}
+.Counter3 { grid-area: Counter3; 
+    text-align: center;}
+
+
+/* Add a Brand Section */
+
+.addABrand{
+  margin: 0 0 30px 0 !important; }
+.addABrand > form > div{
+  padding: 0 0 0 90px !important; }  
+.addABrand > form > header{
+  margin-left: 110px; }
+
+
+/* Add a Category Section */
+
+/* .addCategory{ } */
+
+
+  /* Graph Section */
+.chartdiv {
+  background-color: black;}
+  /* Percentage Circles */
+
+/*  
+
+  Radial Graph Settings
+
+  - size:       .radial-graph, .shape, .mask, and .fill will all need
+                to receive the same width & height properties. Then
+                .mask and .fill need to have their clip property set
+                accordingly. 
+
+  - width:      The stroke width is made by just placing a "cutout" shape 
+                on top, and can be sized and positioned as you like (or removed).
+
+  - progress:   adjust the .fill.shim rotation to a percentage of 
+                the total radius, and then the .mask.full-mask & .fill 
+                rotations to a value of half of that. See inline
+                comments below for the formulas.
+
+*/
+
+.radial-graph{
+    /* margin-top: 20px;
+    margin-left: 85.6665px; */
+}
+.radial-graph,
+.shape,
+.mask,
+.fill {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.shape,
+.mask,
+.fill {
+  position: absolute;
+  background-color: #ebeff1;
+}
+
+.mask,
+.fill {
+ -webkit-backface-visibility: hidden;
+  transition: transform 1s;
+  border-radius: 50%;
+}
+
+.mask {
+  clip: rect(0px, 100px, 100px, 50px);
+}
+.fill {
+  clip: rect(0px, 50px, 100px, 0px);
+  background-color: #222;
+}
+
+.cutout {
+  margin-left: 5px;
+  margin-top: 5px;
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.countersAndCircles > div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+ .mask.full-mask,
+ .fill {
+  /*
+    For a value of 40%
+    0.4 * 360  / 2
+  */
+  transform: rotate(90deg);
+}
+.fill.shim {
+  /* 
+    For a value of 40%
+    0.4 * 360
+  */
+  transform: rotate(180deg);
+}
+
+
+/* Add a category Section */
+
+.addCategory > form > header{
+  margin-bottom: 40px;
+  margin-left: 80px;
+}
+
+
+/* View Tables */
+
+.zigzagLineDiv{
+  height: 10px;
+  width: 100%;
+  background-image: url('images used\zig-zag.svg');
+  background-size: cover; 
+  background-repeat: repeat;
+}
+
+.tableView{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  margin: -10px 20px 50px 20px;
+}
+.tableView > h1 {
+  margin: 50px 0;
+}
+.tableViewContainer > button {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  background-color: #b8a9c9;
+}
+.tableViewContainer > button:hover {
+  background-color: #a899ba;
+}
+.tableView > hr{
+  width: 90%;
+  margin-bottom: 30px;
+  background-color: #6699ff;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 50px;
+}
+th,td {
+  border: 1px solid #606060;
+  padding: 8px;
+  text-align: center;
+}
+th {
+  background-color: #f2f2f2;
+  height: 50px;
+}

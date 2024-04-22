@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>AdminPanel</title>
+	<meta charset="UTF-8">
+	<meta class="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="Index.css">
+    <link rel="stylesheet" type="text/css" href="AdminPanelCss.css">
+</head>
+<body>
+  <div class="adminPanelContainer">
+    <?php
+    // Database connection settings
+    $dbHost = "localhost";
+    $dbUsername = "root"; // Replace with your MySQL username
+    $dbPassword = "";     // Replace with your MySQL password
+    $dbName = "coupon_store";
+    
+    // Create a database connection
+    $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+    
+    // Check the connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    // Retrieve brand options from the brand table
+    $brandQuery = "SELECT brand FROM brand";
+    $brandResult = $conn->query($brandQuery);
+    ?>
+    
+    <!-- Adding a Product -->
+    <div class="addAProduct">
+        <form action="adminpanel.php" method="POST">
+            <div>
+                <label for="brandOfNewProduct">Brand of the Coupon:</label>
+                <input type="text" id="brandOfNewProduct" name="brand" required>
+            </div>
+    
+            <div>
+                <label for="category">Category:</label>
+                <div>
+                    <select id="category" name="category" required>
+                        <option value="">Select Category</option>
+                        <?php
+                        // Populate category options
+                        $categoryQuery = "SELECT category_name FROM category";
+                        $categoryResult = $conn->query($categoryQuery);
+                        while ($row = $categoryResult->fetch_assoc()) {
+                            echo "<option value='" . $row["category_name"] . "'>" . $row["category_name"] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+    
+            <div>
+                <label for="priceOfNewProduct">Price of the Pack:</label>
+                <div>
+                    <input id="priceOfNewProduct" type="number" tabindex="8" min="1" name="price" required>
+                </div>
+            </div>
+    
+            <div>
+                <label for="quantity">Pack of:</label>
+                <div>
+                    <input id="packOfNewProduct" type="number" tabindex="8" min="1" name="quantity" required>
+                </div>
+            </div>
+    
+            <div>
+                <label for="descriptionOfNewProduct">Description of the New Product:</label>
+                <div>
+                    <textarea id="descriptionOfNewProduct" spellcheck="true" rows="2" cols="20" tabindex="9" name="coupon_desc"></textarea>
+                </div>
+            </div>
+                      
+            <div>
+                <label for="imageofProduct">Add image for the Coupon:</label>
+                <input type="text" id="imageofProduct" name="image_src" required>
+            </div>
+
+            <div>
+                <label for="expiryOfNewProduct">Expiry Date:</label>
+                <div>
+                    <input id="expiryOfNewProduct" type="date" tabindex="7" name="expiry" required>
+                </div>
+            </div>
+    
+            <div>
+                <label for="brandOfNewProduct">Supplier:</label>
+                <div>
+                    <select id="brandOfNewProduct" name="supplier" required>
+                        <option value="">Select brand</option>
+                        <?php
+                        // Populate brand options
+                        while ($row = $brandResult->fetch_assoc()) {
+                            echo "<option value='" . $row["brand"] . "'>" . $row["brand"] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+    
+            <div>
+                <div class="save-clearForm">
+                    <input id="saveForm" type="submit" value="Submit" tabindex="10">
+                    <input id="clearForm" type="reset" value="Clear" tabindex="11">
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    
+    <?php
+    // Close the database connection
+    $conn->close();
+    ?>
+
+      
+        <!-- Adding a Product -->
+        <!-- <div class="addAProduct mainLayoutDiv">
+                
+    <form action="#" method="POST">
+        <header><h2>Add a Product</h2></header>    
+        
+        <div>
+            <label class="brandOfNewProduct" for="brandOfNewProduct">Brand of the Coupon</label>
+            <div>
+              <input id="brandOfNewProduct" name="brandOfNewProduct" type="text" class="brandOfNewProduct" value="" tabindex="1">
+            </div>
+        </div>
+        <div>
+          <label for="categoryOfNewProduct">Category</label>
+          <div>
+            <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="0" name="Category" value="Luxury">
+            <label for="categoryOfNewProduct" class="choice">Luxury</label>
+    
+            <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="1" name="Category" value="Clothing">
+            <label for="categoryOfNewProduct" class="choice">Clothing</label>
+    
+            <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="2" name="Category" value="Electronics">
+            <label for="categoryOfNewProduct" class="choice">Electronics</label>
+    
+            <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="3" name="Category" value="Toys">
+            <label for="categoryOfNewProduct" class="choice">Toys</label>
+            <br class="hide-br">
+            <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="4" class="Kids" name="Category" value="Kids">
+            <label for="categoryOfNewProduct" class="choice">Kids</label>
+    
+            <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="5" name="Category" value="Furniture">
+            <label for="categoryOfNewProduct" class="choice">Furniture</label>
+    
+            <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="6" name="Category" value="Food">
+            <label for="categoryOfNewProduct" class="choice">Food</label>
+          </div>
+        </div>
+          
+        <div>
+            <label for="packOfNewProduct">Quantity</label>
+            <div>
+                <input id="packOfNewProduct" class="packOfNewProduct" placeholder="Pack Of" type="number" tabindex="7" min="1"> 
+            </div>
+        </div>
+        <div>
+            <label for="sellingPriceOfNewProduct">Selling Price</label>
+            <div>
+                <input id="sellingPriceOfNewProduct" class="sellingPriceOfNewProduct" name="sellingPriceOfNewProduct" placeholder="₹ " type="number" tabindex="8" min="1"> 
+            </div>
+        </div>
+        <div>
+            <label class="descriptionOfNewProduct" for="descriptionOfNewProduct">Description of the New Product</label>
+            <div>
+              <textarea id="descriptionOfNewProduct" class="descriptionOfNewProduct" name="descriptionOfNewProduct" spellcheck="true" rows="2" cols="20" tabindex="9"></textarea>
+            </div>
+        </div>
+        
+        <div>
+            <label for="expiryOfNewProduct">Expiry</label>
+            <div>
+                <input id="expiryOfNewProduct" class="expiryOfNewProduct" type="date" tabindex="7" name="expiryOfNewProduct"> 
+            </div>
+        </div>   
+
+        <div>
+            <label for="costsellingPriceOfNewProduct">Cost Price</label>
+            <div>
+                <input id="costsellingPriceOfNewProduct" class="costsellingPriceOfNewProduct" placeholder="₹ " type="number" min="1" tabindex="7" name="costsellingPriceOfNewProduct"> 
+            </div>
+        </div>
+
+        <div>
+            <div class="save-clearForm">
+                <input id="saveForm" class="saveForm" type="submit" value="Submit" tabindex="10">
+                <input id="clearForm" class="clearForm" type="reset" value="Clear" tabindex="11">
+            </div>
+        </div>
+        
+    </form>
+        </div> -->
+        
+        <!-- Deleting a Product -->
+        <div class="view-deleteAProduct mainLayoutDiv">
+            <form action="#" method="POST">
+                <header><h2>View / Delete a Product</h2></header>
+                 
+                <div>
+                    <label class="brandOfNewProduct" for="brandOfNewProduct">Brand of the Coupon</label>
+                    <div>
+                      <input id="brandOfNewProduct" name="brandOfNewProduct" type="text" class="brandOfNewProduct" value="" tabindex="1">
+                    </div>
+                </div>
+                <div>
+                    <label for="categoryOfNewProduct">Category</label>
+                    <div>
+                      <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="0" name="Category" value="Luxury">
+                      <label for="categoryOfNewProduct" class="choice">Luxury</label>
+              
+                      <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="1" name="Category" value="Clothing">
+                      <label for="categoryOfNewProduct" class="choice">Clothing</label>
+              
+                      <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="2" name="Category" value="Electronics">
+                      <label for="categoryOfNewProduct" class="choice">Electronics</label>
+              
+                      <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="3" name="Category" value="Toys">
+                      <label for="categoryOfNewProduct" class="choice">Toys</label>
+                      <br class="hide-br">
+                      <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="4" class="Kids" name="Category" value="Kids">
+                      <label for="categoryOfNewProduct" class="choice">Kids</label>
+              
+                      <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="5" name="Category" value="Furniture">
+                      <label for="categoryOfNewProduct" class="choice">Furniture</label>
+              
+                      <input id="categoryOfNewProduct" class="categoryOfNewProduct" type="radio" tabindex="6" name="Category" value="Food">
+                      <label for="categoryOfNewProduct" class="choice">Food</label>
+                    </div>
+                  </div>
+                    
+                  <div>
+                      <label for="sellingPriceOfNewProduct">Price of the Pack</label>
+                      <div>
+                          <input id="sellingPriceOfNewProduct" class="sellingPriceOfNewProduct" name="sellingPriceOfNewProduct" placeholder="₹ " type="number" tabindex="8" min="1"> 
+                      </div>
+                  </div>
+                  <div>
+                      <label class="descriptionOfNewProduct" for="descriptionOfNewProduct">Description of the New Product</label>
+                      <div>
+                        <textarea id="descriptionOfNewProduct" class="descriptionOfNewProduct" name="descriptionOfNewProduct" spellcheck="true" rows="2" cols="20" tabindex="9"></textarea>
+                      </div>
+                  </div>
+                   
+                <div>
+                    <div class="save-clearForm">
+                        <input id="saveForm" class="saveForm" type="submit" value="Submit" tabindex="10">
+                        <input id="clearForm" class="clearForm" type="reset" value="Clear" tabindex="11">
+                    </div>
+                </div>
+              </form>
+        </div>
+
+
+        <div class="revenueGenerated mainLayoutDiv">
+                
+                <div class="chart-container">
+                    <script type="text/javascript" src="AmChart.js"></script>
+                <script type="text/javascript" src="Serial.js"></script>
+                <div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
+                
+                <script>
+                    function hideOthers(e) {
+  var currentGraph = e.dataItem;
+  var hidden = true;
+  //check if we clicked on this graph before and if all the other graphs are visible.
+  // if we clicked on this graph before and the other graphs are invisible,
+  // make them visible, otherwise default to previous behavior
+  if (e.chart.lastClicked == currentGraph.id && e.chart.allVisible == false) {
+      hidden = false;
+      e.chart.allVisible = true;
+  }
+  else {
+    e.chart.allVisible = false;
+  }
+  e.chart.lastClicked = currentGraph.id; //keep track of the current one we clicked
+  
+  currentGraph.hidden = false; //force clicked graph to stay visible
+  e.chart.graphs.forEach(function(graph) {
+    if (graph.id !== currentGraph.id) {
+      graph.hidden = hidden;  //set the other graph's visibility based on the rules above
+    }
+  });
+  // update the chart with newly set hidden values
+  e.chart.validateNow();
+}
+
+AmCharts.makeChart("chartdiv", {
+  "type": "serial",
+  "theme": "dark",
+  "lastClicked": null,
+  "allVisible": true, //if you're only showing one graph by default, set this to false
+  "categoryField": "category",
+  "startDuration": 1,
+  "categoryAxis": {
+    "gridPosition": "start"
+  },
+  "trendLines": [],
+  "graphs": [{
+      "balloonText": "[[title]] of [[category]]:[[value]]",
+      "bullet": "round",
+      "id": "AmGraph-1",
+      "title": "graph 1",
+      "valueField": "column-1"
+    },
+    {
+      "balloonText": "[[title]] of [[category]]:[[value]]",
+      "bullet": "square",
+      "id": "AmGraph-2",
+      "title": "graph 2",
+      "valueField": "column-2"
+    }
+  ],
+  "guides": [],
+  "valueAxes": [{
+    "id": "ValueAxis-1",
+    "stackType": "regular",
+    "title": "Axis title"
+  }],
+  "allLabels": [],
+  "balloon": {},
+  "legend": {
+    "enabled": true,
+    "useGraphSettings": true,
+    "listeners": [{
+      "event": "showItem",
+      "method": hideOthers
+    }, {
+      "event": "hideItem",
+      "method": hideOthers
+    }]
+  },
+  "titles": [{
+    "id": "Title-1",
+    "size": 15,
+    "text": "Chart Title"
+  }],
+  "dataProvider": [{
+      "category": "category 1",
+      "column-1": 8,
+      "column-2": 5
+    },
+    {
+      "category": "category 2",
+      "column-1": 6,
+      "column-2": 7
+    },
+    {
+      "category": "category 3",
+      "column-1": 2,
+      "column-2": 3
+    },
+    {
+      "category": "category 4",
+      "column-1": 1,
+      "column-2": 3
+    },
+    {
+      "category": "category 5",
+      "column-1": 2,
+      "column-2": 1
+    },
+    {
+      "category": "category 6",
+      "column-1": 3,
+      "column-2": 2
+    },
+    {
+      "category": "category 7",
+      "column-1": 6,
+      "column-2": 8
+    }
+  ]
+});
+
+                </script>
+                </div>
+
+                <div class="countersAndCircles">
+                    
+                    <div class="Counter1">
+                        <div class="radial-graph">
+                            <div class="shape">
+                                <div class="mask full-mask">
+                                    <div class="fill"></div>
+                                </div>
+                                <div class="mask">
+                                  <div class="fill"></div>
+                                  <div class="fill shim"></div>
+                                </div>
+                            </div>
+                            <div class="cutout">
+                                <span class="actualPercentageValue">50%</span>
+                            </div>
+                        </div>
+                        <span>Category/Revenue</span>
+                    </div>
+
+                <div class="Counter2">
+                    <div class="radial-graph">
+                        <div class="shape">
+                            <div class="mask full-mask">
+                              <div class="fill"></div>
+                            </div>
+                            <div class="mask">
+                              <div class="fill"></div>
+                              <div class="fill shim"></div>
+                            </div>
+                        </div>
+                        <div class="cutout">
+                            <span class="actualPercentageValue">50%</span>
+                        </div>
+                    </div>
+                    <span>Category/Revenue</span>
+                </div>
+
+                <div class="Counter3">
+                    <div class="radial-graph">
+                        <div class="shape">
+                            <div class="mask full-mask">
+                              <div class="fill"></div>
+                            </div>
+                            <div class="mask">
+                              <div class="fill"></div>
+                              <div class="fill shim"></div>
+                            </div>
+                        </div>
+                        <div class="cutout">
+                            <span class="actualPercentageValue">50%</span>
+                        </div>
+                    </div>
+                    <span>Category/Revenue</span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Products + User Count -->
+        <div class="productsSold mainLayoutDiv">
+                <div class="productsSoldsubDiv productsSold-container">
+                    <div class="counter">
+                        <span data-target="15000" class="count">0</span>
+                    </div><br>
+                    <span>Products Sold</span>
+                </div>
+                <div class="productsSoldsubDiv activeCustomers-container">
+                    <div class="counter">
+                        <span data-target="15000" class="count">0</span>
+                    </div>
+                    <span>Active <br> Customers-Enterprises</span>
+                </div>
+
+        </div>
+
+        <script>
+                const counters = document.querySelectorAll('.count');
+            const speed = 200;
+            
+            counters.forEach((counter) => {
+              const updateCount = () => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const count = parseInt(counter.innerText);
+                const increment = Math.trunc(target / speed);
+            
+                if (count < target) {
+                  counter.innerText = count + increment;
+                  setTimeout(updateCount, 1);
+                } else {
+                  counter.innerText = target;
+                }
+              };
+              updateCount();
+            });
+        </script>
+              
+        
+              
+        <div class="dropDownForCountOfStuff mainLayoutDiv">
+
+
+            <h4><span>Styled</span> and <span>filterable</span> select dropdown</h4>
+<form>
+  <input class="dropDownChosen-value" type="text" value="" placeholder="Type to filter">
+  <ul class="dropDownValue-list">
+    <li>Alabama</li>
+    <li>Alaska</li>
+    <li>Arizona</li>
+    <li>Arkansas</li>
+    <li>California</li>
+    <li>Colorado</li>
+    <li>Connecticut</li>
+    <li>Delaware</li>
+    <li>Florida</li>
+    <li>Georgia</li>
+    <li>Hawaii</li>
+    <li>Idaho</li>
+    <li>Illinois</li>
+    <li>Indiana</li>
+    <li>Iowa</li>
+    <li>Kansas</li>
+    <li>Kentucky</li>
+    <li>Louisiana</li>
+    <li>Maine</li>
+    <li>Maryland</li>
+    <li>Massachusetts</li>
+    <li>Michigan</li>
+    <li>Minnesota</li>
+    <li>Mississippi</li>
+    <li>Missouri</li>
+    <li>Montana</li>
+    <li>Nebraska</li>
+    <li>Nevada</li>
+    <li>New Hampshire</li>
+    <li>New Jersey</li>
+    <li>New Mexico</li>
+    <li>New York</li>
+    <li>North Carolina</li>
+    <li>North Dakota</li>
+    <li>Ohio</li>
+    <li>Oklahoma</li>
+    <li>Oregon</li>
+    <li>Pennsylvania</li>
+    <li>Rhode Island</li>
+    <li>South Carolina</li>
+    <li>South Dakota</li>
+    <li>Tennessee</li>
+    <li>Texas</li>
+    <li>Utah</li>
+    <li>Vermont</li>
+    <li>Virginia</li>
+    <li>Washington</li>
+    <li>West Virginia</li>
+    <li>Wisconsin</li>
+    <li>Wyoming</li>
+  </ul>
+  
+  <input id="saveForm" class="saveForm" type="submit" value="Submit" tabindex="10">
+  
+</form>
+
+
+
+<script>
+
+const inputField = document.querySelector('.dropDownChosen-value');
+const dropdown = document.querySelector('.dropDownValue-list');
+const dropdownArray = [...document.querySelectorAll('li')];
+console.log(typeof dropdownArray);
+dropdown.classList.add('open');
+inputField.focus(); // Demo purposes only
+let valueArray = [];
+dropdownArray.forEach(item => {
+  valueArray.push(item.textContent);
+});
+const closeDropdown = () => {
+  dropdown.classList.remove('open');
+};
+inputField.addEventListener('input', () => {
+  dropdown.classList.add('open');
+  let inputValue = inputField.value.toLowerCase();
+  let valueSubstring;
+  if (inputValue.length > 0) {
+    for (let j = 0; j < valueArray.length; j++) {
+      if (!(inputValue.substring(0, inputValue.length) === valueArray[j].substring(0, inputValue.length).toLowerCase())) {
+        dropdownArray[j].classList.add('closed');
+      } else {
+        dropdownArray[j].classList.remove('closed');
+      }
+    }
+  } else {
+    for (let i = 0; i < dropdownArray.length; i++) {
+      dropdownArray[i].classList.remove('closed');
+    }
+  }
+});
+dropdownArray.forEach(item => {
+  item.addEventListener('click', evt => {
+    inputField.value = item.textContent;
+    dropdownArray.forEach(dropdown => {
+      dropdown.classList.add('closed');
+    });
+  });
+});
+inputField.addEventListener('focus', () => {
+  inputField.placeholder = 'Type to filter';
+  dropdown.classList.add('open');
+  dropdownArray.forEach(dropdown => {
+    dropdown.classList.remove('closed');
+  });
+});
+inputField.addEventListener('blur', () => {
+  inputField.placeholder = 'Select state';
+  dropdown.classList.remove('open');
+});
+document.addEventListener('click', evt => {
+  const isDropdown = dropdown.contains(evt.target);
+  const isInput = inputField.contains(evt.target);
+  if (!isDropdown && !isInput) {
+    dropdown.classList.remove('open');
+  }
+});
+</script>
+        </div>
+    
+    </div>
+
+
+    <div class="addABrand mainLayoutDiv">
+
+      <form action="#" method="POST">
+        <header><h2>Add a Brand</h2></header>    
+        
+        <div>
+            <label class="nameOfNewBrand" for="nameOfNewBrand">Brand Name</label>
+            <div>
+              <input id="nameOfNewBrand" name="nameOfNewBrand" type="text" class="nameOfNewBrand" value="" tabindex="1">
+            </div>
+        </div>  
+        <div>
+            <label for="numberOfNewBrand">Contact Number</label>
+            <div>
+                <input id="numberOfNewBrand" class="numberOfNewBrand" type="tel" tabindex="7" placeholder="+91" pattern="[0-9]{10}" required> 
+            </div>
+        </div>
+        <div>
+            <label for="emailOfNewBrand">Email</label>
+            <div>
+                <input id="emailOfNewBrand" class="emailOfNewBrand" name="emailOfNewBrand" type="email" > 
+            </div>
+        </div>
+        <div>
+          <div class="save-clearForm">
+              <input id="saveForm" class="saveForm" type="submit" value="Submit" tabindex="10">
+              <input id="clearForm" class="clearForm" type="reset" value="Clear" tabindex="11">
+          </div>
+        </div>
+
+        </form>
+    </div>
+        
+  
+</body>
+</html>

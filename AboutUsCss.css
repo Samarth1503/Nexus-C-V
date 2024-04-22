@@ -1,0 +1,30 @@
+#menu{
+    top: 0;
+}
+#menu > li{
+    margin-right: 20px !important;
+}
+#backDropForOverlay{
+  top: 0;
+}
+.aboutUsContainer{
+    width: 1100px;
+    margin: 70px auto;
+    padding: 40px 50px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+}
+.aboutUsContainer > h1{
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+.aboutUsContainer > h2{
+    margin-bottom: 20px;
+}
+.aboutUsContainer > p, .aboutUsContainer > ul > li{
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+}
