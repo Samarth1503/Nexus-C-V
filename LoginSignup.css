@@ -1,0 +1,94 @@
+.goToAdminPanel{
+    position: fixed;
+    height: 70px;
+    width: 155px;
+    left: 50px;
+    top: 20px;
+    display: flex;
+    align-items: center;
+    background-color: aliceblue;
+    justify-content: center;
+}
+.goToAdminPanel:hover{
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.LoginFormcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.LoginFormDiv {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.LoginFormDiv h2 {
+    text-align: center;
+    padding: 20px;
+}
+.headerBottomBorder {
+    width: 80%;
+    margin: auto auto;
+}
+.LoginFormDiv > form {
+    border: none !important;
+    margin-top: 10px;
+    padding: 25px 50px;
+}
+.LoginFormDiv > form > div{
+    padding: 0;
+    margin: 0;
+}
+@media screen and (max-width: 1630px){
+    form > div {
+        padding: 0 !important;
+}}
+.inputGroup > label {
+    font-weight: bold;
+    width: 150px;
+    padding-top: 12px;
+}
+.LoginForm > div > label{
+    width: 100px;
+}
+.inputGroup > input[type="text"],
+.inputGroup > input[type="password"],
+.inputGroup > input[type="email"],
+.inputGroup > input[type="tel"] {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+.loginSubmitButton{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.LoginFormDiv > form > div > button[type="submit"] {
+    margin: 15px 10% 0 4%;
+}
+.LoginFormDiv > form > div > button {
+    width: 40%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.goBackX {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 0;
+    right: 0;
+    margin: 20px 20px 0 0;
+    cursor: pointer;
+}

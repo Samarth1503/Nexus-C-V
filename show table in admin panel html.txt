@@ -1,0 +1,42 @@
+       
+<!-- Table Views -->
+         <div class="tableView">
+            <h1>Coupon Table</h1>
+            <button id="viewCoupons">View Coupons</button>
+            <button id="viewCustomers">View Customers</button>
+            <button id="viewCategories">View Categories</button>
+            <button id="viewBrands">View Brands</button>
+            <div id="tableContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Function to load and display tables without AJAX
+        function loadTable(tableName) {
+            // Hide the previously loaded table (if any)
+            $('#tableContent').hide();
+            
+            // Load the table using PHP include
+            $('#tableContent').load(tableName + '.php', function() {
+                // Show the table when it's loaded
+                $('#tableContent').show();
+            });
+        }
+
+        // Event listeners for table view buttons
+        $('#viewCoupons').click(function () {
+            loadTable('couponTable');
+        });
+
+        $('#viewCustomers').click(function () {
+            loadTable('customerTable');
+        });
+
+        $('#viewCategories').click(function () {
+            loadTable('categoryTable');
+        });
+
+        $('#viewBrands').click(function () {
+            loadTable('brandTable');
+        });
+    </script>

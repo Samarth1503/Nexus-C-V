@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Cart</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="Index.css">
+  <link rel="stylesheet" type="text/css" href="Cartcss.css">
+</head>
+<body>
+
+  <!-- og code -->
+  <nav id='menu'>
+    <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label class="MenuLabel"></label>
+    <ul class="MenuUl">
+        <div class="MenuHeading">
+          <li><img class="MenuLogoImg" src="images used\FestivalGridImages\Logo.jpg"/></li>
+        </div>
+      <div class="MenuHeading">
+        <li><a href='https://localhost/project-pushkar/Index.php'>Home</a></li>
+      </div>
+      <div class="MenuHeading">
+        <li><a href='https://localhost/project-pushkar/AboutUs.php'>About Us</a></li>
+      </div>
+      <div class="MenuHeading">
+        <li><a href='#shopDiv'>Shop</a></li>
+      </div>
+      <div class="MenuHeading">
+        <li><a id="contactUsTrigger">Contact Us</a></li>
+      </div>
+      <div class="MenuHeading">
+        <li><a class="navBarDropDown UserAccountDiv" href="#">
+          <img src="images used/user.png" class="UserIcon">
+          <?php
+            session_start();
+            // Check if the user is logged in (has an active session)
+            if (isset($_SESSION["user_name"])) {
+              echo 'Hello ' . $_SESSION["user_name"];
+            } else {
+              echo 'Hello Guest';
+            }
+          ?>
+        </a>
+          <ul class='navBarSub-menus'>
+          <li><a id="logoutLink">Logout</a></li>
+          
+          <li><a id="delete-account-link">Delete Account</a></li>
+
+          </ul>
+        </li>
+      </div>
+    </ul>
+
+      <li>
+        <div class="dark-mode__toggler-container">
+
+            <!-- <a href='http://'>ThemeDiv</a> -->
+            <!-- Not responsive yet -->
+            <!-- add resposive sizes to @media (max-width: 60em) & if required to @media (max-width: 30em) as well -->
+            <!-- Once colour scheme is final, add a dark mode colour scheme with css or js -->
+            
+            <div class="flipswitch">
+                <input type="checkbox" name="flipswitch" class="flipswitch-cb" id="fs" checked>
+                <label class="flipswitch-label" for="fs">
+                    <div class="flipswitch-inner"></div>
+                    <div class="flipswitch-switch"></div>
+                </label>
+            </div>
+        </div>
+      </li>
+  </nav>
+
+
+    <!-- Logout Account Confirmation dialog -->
+    <div id="backDropForOverlay"></div>
+    <div id="confirmationPopup">
+      <br>
+      <div>
+        <h2>Confirm Logout</h2>
+      </div>
+      <br>
+      <div>
+        <p>Are you sure you want to logout?</p>
+      </div>
+      <div>
+        <button type="submit" id="confirmLogout"><a href="logout.php">Yes</a></button>
+        <button id="cancelLogout">No</button>
+      </div>
+    </div>
+
+    <!-- Delete Account Confirmation dialog -->
+    <div id="backDropForOverlay"></div>
+    <div id="confirmation-dialog">
+      <br>
+      <div>
+        <h2>Confirm Deletion</h2>
+      </div>
+      <br>
+      <div>
+        <p>Are you sure you want to delete your account?</p>
+      </div>
+      <div>
+        <button type="submit" id="confirm-delete">Yes</button>
+        <button id="cancel-delete">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Contact Us dialog -->
+    <div id="backDropForOverlay"></div>
+    <div id="contactUsDialog">
+      <h2>Contact Us</h2>
+      <hr>
+      <form id="contactUsForm" action="process_contact.php" method="post">
+        <div>
+          <label for="name">Name :</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="email">Email :</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="message">Message :</label>
+          <textarea id="message" name="message"  rows="3" cols="25" required></textarea>
+        </div>
+        <div id="buttonsDiv">
+          <input type="submit" value="Submit" id="contactUsSubmit">
+          <input type="reset" id="reset" name="reset" required>
+        </div>
+      </form>
+    </div>
+
+    <script>
+    const backdrop = document.getElementById("backDropForOverlay");
+    const confirmationPopup = document.getElementById("confirmationPopup");
+    const confirmationDialog = document.getElementById("confirmation-dialog");
+    const contactUsDialog = document.getElementById("contactUsDialog");
+
+    function hideDialog() {
+        backdrop.style.display = 'none';
+        confirmationPopup.style.display = 'none';
+        confirmationDialog.style.display = 'none';
+        contactUsDialog.style.display = 'none';
+    }
+
+    // Add a click event listener to the backdrop to close any dialog
+    backdrop.addEventListener("click", hideDialog);
+
+    // Show the confirmation popup when clicking the logout link
+    const logoutLink = document.getElementById("logoutLink");
+    logoutLink.addEventListener("click", (event) => {
+        event.preventDefault(); // Prevent the link from navigating
+        hideDialog();
+        backdrop.style.display = 'flex';
+        confirmationPopup.style.display = 'flex';
+    });
+
+    // Handle logout confirmation
+    const confirmLogoutButton = document.getElementById("confirmLogout");
+    confirmLogoutButton.addEventListener("click", () => {
+        // Add your logout logic here, such as redirecting to a logout page
+        // For example, you can use window.location.href = 'logout.php';
+
+        // For this example, we'll just close the popup
+        hideDialog();
+    });
+
+    // Close the confirmation popup when clicking the "No" button
+    const cancelLogoutButton = document.getElementById("cancelLogout");
+    cancelLogoutButton.addEventListener("click", hideDialog);
+
+    // Get references to the link and the confirmation dialog
+    const deleteAccountLink = document.getElementById('delete-account-link');
+    deleteAccountLink.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the link from navigating
+        hideDialog();
+        backdrop.style.display = 'flex';
+        confirmationDialog.style.display = 'flex';
+    });
+
+    // Add a click event listener to the "Yes" button in the delete account dialog
+    const confirmDeleteButton = document.getElementById('confirm-delete');
+    confirmDeleteButton.addEventListener('click', function () {
+        // Perform the actual account deletion logic here, e.g., via AJAX
+        alert('Account deleted!'); // For demonstration purposes
+        hideDialog();
+    });
+
+    // Add a click event listener to the "Cancel" button in the delete account dialog
+    const cancelDeleteButton = document.getElementById('cancel-delete');
+    cancelDeleteButton.addEventListener('click', hideDialog);
+
+    // Get a reference to the contact us trigger
+    const contactUsTrigger = document.getElementById('contactUsTrigger');
+    contactUsTrigger.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the link from navigating
+        hideDialog();
+        backdrop.style.display = 'flex';
+        contactUsDialog.style.display = 'flex';
+    });
+
+    // Add a click event listener to the "Submit" button in the contact us dialog
+    const contactUsSubmitButton = document.getElementById('contactUsSubmit');
+    contactUsSubmitButton.addEventListener('click', function () {
+        // Perform the actual form submission logic here, e.g., via AJAX
+        alert('We will contact you as soon as possible'); // For demonstration purposes
+        hideDialog();
+    });
+    </script>
+
+
+
+<!-- Scroll to the Top section -->
+
+<button id="scrollToTopButton"><p>↑</p></button>
+<script>
+  // Get a reference to the button element
+  const scrollToTopButton = document.getElementById("scrollToTopButton");
+
+  // Add a scroll event listener to check when to show or hide the button
+  window.addEventListener("scroll", () => {
+      if (document.documentElement.scrollTop > 100) {
+          scrollToTopButton.style.display = "block";
+      } else {
+          scrollToTopButton.style.display = "none";
+      }
+  });
+
+  // Add a click event listener to scroll to the top when the button is clicked
+  scrollToTopButton.addEventListener("click", () => {
+      document.documentElement.scrollTo({
+          top: 0,
+          behavior: "smooth"
+      });
+  });
+</script>
+
+
+
+  <!-- Heading for Cart Html -->
+  <div class="cartHtmlHeading">
+    <h2>Your Cart</h2>
+  </div>
+
+
+  <!-- Cart Table Section -->
+  <div class="cartProductHeadingGrid">
+    <div class="cPPImageHeading"><span>Brand</span></div>
+    <div class="cPPDescriptionHeading"><span>Description</span></div>
+    <div class="cPPPackHeading"><span>Quantity</span></div>
+    <div class="cPPPriceHeading"><span>Price</span></div>
+    <div class="cPPDeleteHeading"></div>
+  </div>
+
+  <div class="cartPageProductContainer">  
+
+    <div class="cartPageProductGrid cPP-Prod1">
+      <div class="cPPImage cPP-Prod1">
+        <img src="images used/Logos/Tech/Alienware.png" alt="Alienware">
+      </div>
+      <div class="cPPDescription cPP-Prod1">
+        <span>Get 15% off on Product</span>
+      </div>
+      <div class="cPPPack cPP-Prod1">
+        <span>Pack of 100</span>
+      </div>
+      <div class="cPPPrice cPP-Prod1">
+        <span>₹1000</span>
+      </div>
+      <div class="cPPDelete cPP-Prod1">
+        <img src="images used/remove.png" alt="Delete">
+      </div>
+    </div>
+  
+    <div class="cartPageProductGrid cPP-Prod2">
+      <div class="cPPImage cPP-Prod2">
+        <img src="images used/Logos/Clothing/1 (34).png" alt="Dyson">
+      </div>
+      <div class="cPPDescription cPP-Prod2">
+        <span>Get 15% off on Product</span>
+      </div>
+      <div class="cPPPack cPP-Prod2">
+        <span>Pack of 100</span>
+      </div>
+      <div class="cPPPrice cPP-Prod2">
+        <span>₹1000</span>
+      </div>
+      <div class="cPPDelete cPP-Prod2">
+        <img src="images used/remove.png" alt="Delete">
+      </div>
+    </div>
+
+    <div class="cartPageProductGrid cPP-Prod3">
+      <div class="cPPImage cPP-Prod3">
+        <img src="images used/Logos/Clothing/1 (51).png" alt="Alienware">
+      </div>
+      <div class="cPPDescription cPP-Prod3">
+        <span>Get 15% off on Product</span>
+      </div>
+      <div class="cPPPack cPP-Prod3">
+        <span>Pack of 100</span>
+      </div>
+      <div class="cPPPrice cPP-Prod3">
+        <span>₹1000</span>
+      </div>
+      <div class="cPPDelete cPP-Prod3">
+        <img src="images used/remove.png" alt="Delete">
+      </div>
+    </div>
+
+    <div class="cartPageProductGrid cPP-Prod4">
+      <div class="cPPImage cPP-Prod4">
+        <img src="images used/Logos/Tech/Alienware.png" alt="Alienware">
+      </div>
+      <div class="cPPDescription cPP-Prod4">
+        <span>Get 15% off on Product</span>
+      </div>
+      <div class="cPPPack cPP-Prod4">
+        <span>Pack of 100</span>
+      </div>
+      <div class="cPPPrice cPP-Prod4">
+        <span>₹1000</span>
+      </div>
+      <div class="cPPDelete cPP-Prod4">
+        <img src="images used/remove.png" alt="Delete">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Totals Section -->
+  <div class="cartPageProductTotalsGrid">
+    
+    <div class="TotalQuantity"> <span>Total Quantity : 100</span> </div>
+    <div class="TotalPrice"> <span>Total Price : ₹1000</span> </div>
+    <div class="BuyNow"> 
+      <button value="Buy" class="cPPBuyButton"><p>Buy</p></button>
+    </div>
+  </div>
+
+
+</body>
+</html>

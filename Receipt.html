@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Receipt</title>
+<meta charset="UTF-8">
+<meta class="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="ReceiptCss.css">
+</head>
+<body>
+    <div class="receipt">
+        <div class="receiptHeader">
+            <img src="Logo.jpg">
+            <h2>Receipt</h2>
+        </div>
+
+        <!-- Receipt Table -->
+        <table class="receipt-table">
+            <tr>
+                <th>Receipt Number</th>
+                <td>123456</td>
+            </tr>
+            <tr>
+                <th>Receipt Date</th>
+                <td>' . $currentDateTime . '</td>
+            </tr>
+            <tr>
+                <th>Customer Name</th>
+                <td>John Doe</td>
+            </tr>
+        </table>
+
+        <!-- Cart Table (Data retrieved from the database) -->
+        <h2>Cart</h2>
+        <table class="cart-table">
+            <tr>
+                <th>Brand</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>';
+// PHP loop to generate cart table
+foreach ($cartItems as $item) {
+$html .= '
+            <tr>
+                <td>' . $item['brand'] . '</td>
+                <td>' . $item['description'] . '</td>
+                <td>' . $item['quantity'] . '</td>
+                <td>$' . $item['price'] . '</td>
+            </tr>';
+}
+
+$html .= '
+            <tr>
+                <td colspan="3">Total Price</td>
+                <td>$' . $totalPrice . '</td>
+            </tr>
+        </table>
+                    
+        <div class="barcodeDiv">
+            <img src="images used/barcode.jpg" style="right: 0;">
+        </div>
+        <p class="receiptFooter">
+            For any inquiries contact us on cNv@hotmail.com
+        </p>
+    </div>
+</body>
+</html>

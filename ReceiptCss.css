@@ -1,0 +1,102 @@
+/* Adding font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Hide the scrollbar but keep it functional */
+body::-webkit-scrollbar {
+    width: 0.1em;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+  
+/* Set core body defaults */
+body {
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+
+body > div {
+    margin: 30px auto;
+}
+.receiptHeader{
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    margin-top: 20px;
+}
+.receiptHeader > img{
+    height: 50px;
+}
+
+
+
+.receipt {
+    border: 1px solid #ccc;
+    padding: 0 20px 20px 20px;
+    max-width: 800px;
+}
+.receiptHeader > h2{
+    text-align: center;
+    margin-right: -40px;
+}
+.receipt > h2{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.receipt-table th,
+.receipt-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.barcodeDiv > img{
+    height: 50px;
+}
+.receiptFooter{
+    font-size: 10px;
+    text-align: center;
+}
+    
+
+
+
+
+
+
+
+
